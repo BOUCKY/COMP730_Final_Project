@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task List</title>
+<style>
+   
+
+.button-container {
+    margin-top: 20px;
+}
+
+.button-container button {
+    display: block;
+    width: 200px; 
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+</style>
+<style>
+   
+    body {
+        font-family: Arial, sans-serif;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .button-container {
+        margin-top: 20px;
+    }
+    button {
+        padding: 8px 16px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <h2>Task List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Task Name</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="taskList">
+           
+        </tbody>
+    </table>
+    <div class="button-container">
+        <button onclick="createNewTask()">Create New Task</button>
+    </div>
+
+    <script>
+        
+        const tasks = [
+            { name: "Task 1", dueDate: "2024-04-15", status: "Incomplete" },
+            { name: "Task 2", dueDate: "2024-04-20", status: "Complete" },
+            { name: "Task 3", dueDate: "2024-04-25", status: "Incomplete" },
+            { name: "Task 4", dueDate: "2024-04-30", status: "Incomplete" }
+        ];
+
+        
+        function generateTaskRows() {
+            const tbody = document.getElementById("taskList");
+            tbody.innerHTML = ""; 
+            tasks.forEach(task => {
+                const row = `
+                    <tr>
+                        <td>${task.name}</td>
+                        <td>${task.dueDate}</td>
+                        <td>${task.status}</td>
+                        <td><button onclick="viewTaskDetails('${task.name}')">View Details</button></td>
+                    </tr>`;
+                tbody.insertAdjacentHTML("beforeend", row);
+            });
+        }
+
+        
+        generateTaskRows();
+
+        
+        function createNewTask() {
+            window.location.href = "task_creation.html";
+        }
+
+        
+        function viewTaskDetails(taskName) {
+            
+            window.location.href = `task_details.html?task=${taskName}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Details Page</title>
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .task-details {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    span {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+</style>
+<style>
+    
+
+.button-container {
+    margin-top: 20px;
+}
+
+.button-container button {
+    display: block;
+    width: 200px; 
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+    <h2>Task Details</h2>
+    <div class="task-details">
+        <label for="taskName">Task Name:</label>
+        <span id="taskName"></span>
+        <label for="description">Description:</label>
+        <span id="description"></span>
+        <label for="dueDate">Due Date:</label>
+        <span id="dueDate"></span>
+        <label for="priority">Priority Level:</label>
+        <span id="priority"></span>
+        <label for="status">Status:</label>
+        <span id="status"></span>
+    </div>
+    <button onclick="editTask()">Edit Task</button>
+    <button onclick="markTaskComplete()">Mark as Complete</button>
+    <button onclick="deleteTask()">Delete Task</button>
+
+    <script>
+        
+        const tasks = [
+            { name: "Task 1", description: "Description for Task 1", dueDate: "2024-04-15", priority: "High", status: "Incomplete" },
+            { name: "Task 2", description: "Description for Task 2", dueDate: "2024-04-20", priority: "Medium", status: "Complete" },
+            { name: "Task 3", description: "Description for Task 3", dueDate: "2024-04-25", priority: "Low", status: "Incomplete" },
+            { name: "Task 4", description: "Description for Task 4", dueDate: "2024-04-30", priority: "High", status: "Incomplete" }
+        ];
+
+        
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        
+        const taskName = getQueryParam("task");
+
+       
+        const task = tasks.find(task => task.name === taskName);
+
+        
+        function displayTaskDetails(task) {
+            if (task) {
+                document.getElementById("taskName").textContent = task.name;
+                document.getElementById("description").textContent = task.description;
+                document.getElementById("dueDate").textContent = task.dueDate;
+                document.getElementById("priority").textContent = task.priority;
+                document.getElementById("status").textContent = task.status;
+            } else {
+               
+                document.getElementById("taskName").textContent = "Task Not Found";
+                
+            }
+        }
+
+        
+        displayTaskDetails(task);
+
+        
+        function editTask() {
+            
+            window.location.href = `task_edit.html?task=${taskName}`;
+        }
+
+       
+        function markTaskComplete() {
+            if (task) {
+                task.status = "Complete";
+              
+                document.getElementById("status").textContent = task.status;
+            }
+        }
+
+        
+        function deleteTask() {
+            if (task) {
+                
+                const index = tasks.findIndex(t => t.name === task.name);
+                if (index !== -1) {
+                    
+                    tasks.splice(index, 1);
+                    
+                    window.location.href = "task_list.html";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

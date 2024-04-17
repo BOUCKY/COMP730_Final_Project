@@ -1,4 +1,4 @@
-public class Main {
+ublic class Main {
     public static void main(String[] args) {
         TaskManager taskManager = new TaskManager();
 
@@ -9,7 +9,5 @@ public class Main {
 
         // Display all tasks
         taskManager.displayTasks();
- 
 
-    }
 }

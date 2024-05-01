@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 class TaskManager {
@@ -37,7 +41,7 @@ class TaskManager {
         System.out.println("Invalid input! Please enter valid data.");
         scanner.nextLine(); // Consume invalid input
     }
-}
+    }
 
     // Method to display all tasks
     public void displayTasks() {
@@ -78,11 +82,6 @@ class TaskManager {
         }
     }
 
-    // Method to create a task
-    public void createTask(String name, String description, String dueDate, int priority) {
-    Task task = new Task(name, description, dueDate, priority);
-    addTask(task); // Add the task to the list
-    }
 
     // Add a method to edit task details
     public void editTask(int index, String newName, String newDescription, String newDueDate, int newPriority) {
